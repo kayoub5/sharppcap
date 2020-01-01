@@ -19,8 +19,7 @@ for:
   install:
     - sudo apt-get -qy install libpcap-dev
 
-build_script:
-  - dotnet build -c Release $DOTNET_ARGS
+build: off
 
 test_script:
   - dotnet test -c Release $DOTNET_ARGS
