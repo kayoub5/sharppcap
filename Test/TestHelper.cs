@@ -26,8 +26,16 @@ namespace Test
         internal static PcapDevice GetPcapDevice()
         {
             var nics = NetworkInterface.GetAllNetworkInterfaces();
+            foreach(var nic in nics)
+            {
+                Console.WriteLine(nic.Name);
+                Console.WriteLine(nic.GetPhysicalAddress());
+            }
             foreach (var device in LibPcapLiveDeviceList.Instance)
             {
+                Console.WriteLine(device.Interface);
+                Console.WriteLine(device.Interface.FriendlyName);
+                Console.WriteLine(device.Interface.MacAddress);
                 var nic = nics.FirstOrDefault(
                     ni => ni.Name == device.Interface.FriendlyName
                     || ni.GetPhysicalAddress().Equals(device.Interface.MacAddress)
