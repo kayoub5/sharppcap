@@ -13,17 +13,17 @@ jobs:
           name: Build
           command: dotnet build -c Release
 
-  test-winpcap:
-    executor:
-      name: win/default
+  test-libpcap:
+    docker:
+      - image: 'mcr.microsoft.com/dotnet/core/sdk:3.1-buster'
     steps:
       - checkout
       - run:
           name: Install
-          command: choco install -y winpcap
+          command: sudo apt-get install -y libpcap-dev
       - run:
           name: Test
-          command: dotnet test -c Release
+          command: dotnet test -c Release -f netcoreapp2.1
 
 
 workflows:
@@ -31,4 +31,4 @@ workflows:
   build:
     jobs:
       - build
-      - test-winpcap
+      - test-libpcap

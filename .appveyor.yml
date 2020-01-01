@@ -1,3 +1,7 @@
+
+# Disable automatic AppVeyor build logic
+build: off
+
 image:
   - Visual Studio 2019
   - Ubuntu
@@ -9,17 +13,18 @@ for:
       - image: Visual Studio 2019
   install:
     - choco install -y winpcap
+  build_script:
+    - dotnet build -c Release
+  test_script:
+    - dotnet test -c Release
 
 -
   matrix:
     only:
       - image: Ubuntu
   environment:
-    DOTNET_ARGS: -f netcoreapp2.1
+    DOTNET_ARGS: 
   install:
     - sudo apt-get -qy install libpcap-dev
-
-build: off
-
-test_script:
-  - dotnet test -c Release $DOTNET_ARGS
+  test_script:
+    - dotnet test -c Release -f netcoreapp2.1
