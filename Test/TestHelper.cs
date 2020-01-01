@@ -28,22 +28,28 @@ namespace Test
             var nics = NetworkInterface.GetAllNetworkInterfaces();
             foreach (var device in LibPcapLiveDeviceList.Instance)
             {
+                var nic = nics.FirstOrDefault(
+                    ni => ni.Name == device.Interface.FriendlyName
+                    || ni.GetPhysicalAddress().Equals(device.Interface.MacAddress)
+                );
+                if (nic?.OperationalStatus != OperationalStatus.Up)
+                {
+                    continue;
+                }
+                LinkLayers link;
                 try
                 {
                     device.Open();
-                    if (device.LinkType == LinkLayers.Ethernet)
-                    {
-                        var nic = nics.FirstOrDefault(ni => ni.Name == device.Interface.FriendlyName);
-                        if (nic.OperationalStatus == OperationalStatus.Up)
-                        {
-                            return device;
-                        }
-                    }
+                    link = device.LinkType;
                     device.Close();
                 }
-                catch (Exception)
+                catch (PcapException)
                 {
                     continue;
+                }
+                if (link == LinkLayers.Ethernet)
+                {
+                    return device;
                 }
             }
             return null;
