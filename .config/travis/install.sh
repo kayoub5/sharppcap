@@ -19,9 +19,9 @@ then
     # WinPcap does not actually work on Travis, but we need the rpcapd.exe file
     # See https://github.com/nmap/nmap/issues/1329
     choco install -y winpcap
-    cp '/c/Program Files (x86)/WinPcap/rpcapd.exe' /tmp
+    cp '/c/Program Files (x86)/WinPcap/rpcapd.exe' $TMP
     # winpcap does not work on travis ci - so install npcap (package is unlisted -> version)
     choco install -y npcap --version 0.86
     mkdir -p '/c/Program Files (x86)/WinPcap'
-    cp /tmp/rpcapd.exe '/c/Program Files (x86)/WinPcap'
+    cp $TMP/rpcapd.exe '/c/Program Files (x86)/WinPcap'
 fi
