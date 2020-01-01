@@ -30,7 +30,6 @@ namespace Test
             {
                 Console.WriteLine(device.Interface);
                 Console.WriteLine(device.Interface.FriendlyName);
-                Console.WriteLine(device.Interface.MacAddress);
                 var nic = nics.FirstOrDefault(ni => ni.Name == device.Interface.FriendlyName);
                 Console.WriteLine(nic?.OperationalStatus);
                 if (nic?.OperationalStatus != OperationalStatus.Up)
