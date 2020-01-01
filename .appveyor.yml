@@ -14,11 +14,13 @@ for:
   matrix:
     only:
       - image: Ubuntu
+  environment:
+    DOTNET_ARGS: -f netcoreapp2.1
   install:
     - sudo apt-get -qy install libpcap-dev
 
 build_script:
-  - dotnet build -c Release
+  - dotnet build -c Release $DOTNET_ARGS
 
 test_script:
-  - dotnet test -c Release
+  - dotnet test -c Release $DOTNET_ARGS
