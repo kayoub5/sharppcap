@@ -20,7 +20,9 @@ jobs:
       - checkout
       - run:
           name: Install
-          command: apt-get install -y libpcap-dev
+          command:
+            - apt-get update
+            - apt-get install -y libpcap-dev
       - run:
           name: Test
           command: dotnet test -c Release -f netcoreapp2.1
