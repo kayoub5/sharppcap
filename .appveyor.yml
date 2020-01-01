@@ -1,0 +1,24 @@
+image:
+  - Visual Studio 2019
+  - Ubuntu
+
+for:
+-
+  matrix:
+    only:
+      - image: Visual Studio 2019
+  install:
+    - choco install -y winpcap
+
+-
+  matrix:
+    only:
+      - image: Ubuntu
+  install:
+    - sudo apt-get -qy install libpcap-dev
+
+build_script:
+  - dotnet build -c Release
+
+test_script:
+  - dotnet test -c Release
