@@ -4,7 +4,8 @@ build: off
 
 image:
   - Visual Studio 2019
-  - Ubuntu
+  - Ubuntu1604
+  - macos
 
 for:
 -
@@ -21,10 +22,18 @@ for:
 -
   matrix:
     only:
-      - image: Ubuntu
-  environment:
-    DOTNET_ARGS: 
+      - only: Ubuntu1604
   install:
     - sudo apt-get -qy install libpcap-dev
+  test_script:
+    - dotnet test -c Release -f netcoreapp2.1
+
+-
+  matrix:
+    only:
+      - only: macos
+  install:
+    - brew update
+    - brew install libpcap
   test_script:
     - dotnet test -c Release -f netcoreapp2.1

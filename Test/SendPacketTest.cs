@@ -1,32 +1,34 @@
 ﻿using NUnit.Framework;
 using PacketDotNet;
-using SharpPcap;
-using SharpPcap.LibPcap;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using static Test.TestHelper;
-using static System.TimeSpan;
 
 namespace Test
 {
     [TestFixture]
     public class SendPacketTest
     {
-        private const string Filter = "ether proto 0x1234";
+        private const string Filter = "udp port 9999";
 
         [Test]
         public void TestSendPacketTest()
         {
-            var packet = EthernetPacket.RandomPacket();
-            packet.Type = (EthernetType)0x1234;
+            var eth = EthernetPacket.RandomPacket();
+            eth.DestinationHardwareAddress = PhysicalAddress.Parse("FFFFFFFFFFFF");
+            var ip = IPv4Packet.RandomPacket();
+            ip.DestinationAddress = IPAddress.Parse("255.255.255.255");
+            var udp = UdpPacket.RandomPacket();
+            udp.DestinationPort = 9999;
+            eth.PayloadPacket = ip;
+            ip.PayloadPacket = udp;
+            udp.PayloadData = new byte[32];
             var received = RunCapture(Filter, (device) =>
             {
-
-                device.SendPacket(packet);
+                device.SendPacket(eth);
             });
             Assert.That(received, Has.Count.EqualTo(1));
-            CollectionAssert.AreEquivalent(packet.Bytes, received[0].Data);
+            CollectionAssert.AreEquivalent(eth.Bytes, received[0].Data);
         }
     }
 }

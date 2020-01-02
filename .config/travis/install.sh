@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Install on osx
 if [ "$TRAVIS_OS_NAME" = "osx" ]
@@ -21,9 +20,15 @@ then
     # WinPcap does not actually work on Travis, but we need the rpcapd.exe file
     # See https://github.com/nmap/nmap/issues/1329
     choco install -y winpcap
-    cp 'C:\Program Files (x86)\WinPcap\rpcapd.exe' $TMP
+    for pf in "C:\Program Files (x86)" "C:\Program Files"
+    do
+        if [ -d "$pf\WinPcap" ]; then
+            WINPCAP_DIR="$pf\WinPcap"
+        fi
+    done
+    cp "$WINPCAP_DIR\rpcapd.exe" $TMP
     # winpcap does not work on travis ci - so install npcap (package is unlisted -> version)
     choco install -y npcap --version 0.86
-    mkdir -p 'C:\Program Files (x86)\WinPcap'
-    cp $TMP/rpcapd.exe 'C:\Program Files (x86)\WinPcap'
+    mkdir -p "$WINPCAP_DIR"
+    cp $TMP/rpcapd.exe "$WINPCAP_DIR\rpcapd.exe"
 fi
