@@ -16,5 +16,5 @@ fi
 # Test on windows
 if [ "$TRAVIS_OS_NAME" = "windows" ]
 then
-    dotnet test
+    dotnet test --filter TestCategory!=RemotePcap
 fi

@@ -25,7 +25,7 @@ jobs:
           name: Test
           command: sudo dotnet test --test-adapter-path:. --logger:junit -f netcoreapp2.1 --filter TestCategory!=SendPacket
       - store_test_results:
-          path: Test/TestResults/TestResults.xml
+          path: Test/TestResults
 
 workflows:
   version: 2
