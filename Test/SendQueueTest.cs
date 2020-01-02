@@ -18,6 +18,7 @@ namespace Test
         private static readonly long DeltaTicks = FromMilliseconds(1).Ticks;
 
         [Test]
+        [Platform("Win")]
         public void TestNativeTransmitNormal()
         {
             var received = RunCapture(Filter, (device) =>
@@ -28,6 +29,7 @@ namespace Test
         }
 
         [Test]
+        [Platform("Win")]
         public void TestNativeTransmitSync()
         {
             var received = RunCapture(Filter, (device) =>
