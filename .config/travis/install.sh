@@ -19,20 +19,11 @@ if [ "$TRAVIS_OS_NAME" = "windows" ]
 then
     # WinPcap does not actually work on Travis, but we need the rpcapd.exe file
     # See https://github.com/nmap/nmap/issues/1329
-    choco install -y winpcap
-    ls "C:\Program Files (x86)"
-    ls "C:\Program Files"
-    ls "C:\Program Files (x86)\WinPcap"
-    ls "C:\Program Files\WinPcap" 
-    for pf in "C:\Program Files (x86)" "C:\Program Files"
-    do
-        if [ -d "$pf\WinPcap" ]; then
-            WINPCAP_DIR="$pf\WinPcap"
-        fi
-    done
-    cp "$WINPCAP_DIR\rpcapd.exe" $TMP
+    choco install 7zip.install
+    curl https://www.winpcap.org/install/bin/WinPcap_4_1_3.exe > WinPcap_4_1_3.exe
+    7z -y e WinPcap_4_1_3.exe "-oC:\Program Files (x86)\WinPcap" rpcapd.exe
+
     # winpcap does not work on travis ci - so install npcap (package is unlisted -> version)
     choco install -y npcap --version 0.86
-    mkdir -p "$WINPCAP_DIR"
-    cp $TMP/rpcapd.exe "$WINPCAP_DIR\rpcapd.exe"
+
 fi
