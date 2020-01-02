@@ -11,6 +11,7 @@ using static System.TimeSpan;
 namespace Test
 {
     [TestFixture]
+    [NonParallelizable]
     public class SendQueueTest
     {
         private const string Filter = "ether proto 0x1234";
@@ -82,10 +83,18 @@ namespace Test
         public void TestReturnValue()
         {
             var device = GetPcapDevice();
-            var queue = GetSendQueue();
-            var managed = queue.ManagedTransmit(device, false);
-            var native = queue.NativeTransmit(device, false);
-            Assert.AreEqual(managed, native);
+            device.Open();
+            try
+            {
+                var queue = GetSendQueue();
+                var managed = queue.ManagedTransmit(device, false);
+                var native = queue.NativeTransmit(device, false);
+                Assert.AreEqual(managed, native);
+            }
+            finally
+            {
+                device.Close();
+            }
         }
 
         /// <summary>
