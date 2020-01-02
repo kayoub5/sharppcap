@@ -26,7 +26,7 @@ for:
   install:
     - sudo apt-get -qy install libpcap-dev
   test_script:
-    - sudo dotnet test -c Release -f netcoreapp2.1 --filter TestCategory!=SendPacket
+    - sudo dotnet test -f netcoreapp2.1 --filter TestCategory!=SendPacket
 
 -
   matrix:
@@ -36,4 +36,4 @@ for:
     - brew update
     - brew install libpcap
   test_script:
-    - sudo dotnet test -c Release -f netcoreapp2.1
+    - sudo dotnet test -f netcoreapp2.1
