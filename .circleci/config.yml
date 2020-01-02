@@ -23,7 +23,7 @@ jobs:
           command: sudo bash .circleci/install.sh
       - run:
           name: Test
-          command: sudo dotnet test -f netcoreapp2.1
+          command: sudo dotnet test -f netcoreapp2.1 --filter TestCategory!=SendPacket
 
 
 workflows:

@@ -7,6 +7,8 @@ using static Test.TestHelper;
 namespace Test
 {
     [TestFixture]
+    [NonParallelizable]
+    [Category("SendPacket")]
     public class SendPacketTest
     {
         private const string Filter = "udp port 9999";
