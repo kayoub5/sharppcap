@@ -17,7 +17,7 @@ for:
   build_script:
     - dotnet build -c Release
   test_script:
-    - dotnet test -c Release
+    - dotnet test
 
 -
   matrix:
