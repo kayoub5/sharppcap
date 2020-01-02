@@ -22,7 +22,7 @@ for:
 -
   matrix:
     only:
-      - only: Ubuntu1604
+      - image: Ubuntu1604
   install:
     - sudo apt-get -qy install libpcap-dev
   test_script:
@@ -31,7 +31,7 @@ for:
 -
   matrix:
     only:
-      - only: macos
+      - image: macos
   install:
     - brew update
     - brew install libpcap

@@ -74,8 +74,8 @@ namespace Test
             for (int i = 1; i < PacketCount; i++)
             {
                 var delta = (times[i] - times[i - 1]).Ticks;
-                Assert.That(delta, Is.LessThan(DeltaTicks * 1.1));
-                Assert.That(delta, Is.GreaterThan(DeltaTicks * 0.9));
+                Assert.That(delta, Is.LessThan(DeltaTicks * 1.2));
+                Assert.That(delta, Is.GreaterThan(DeltaTicks * 0.8));
             }
         }
 

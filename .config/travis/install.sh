@@ -20,6 +20,10 @@ then
     # WinPcap does not actually work on Travis, but we need the rpcapd.exe file
     # See https://github.com/nmap/nmap/issues/1329
     choco install -y winpcap
+    ls "C:\Program Files (x86)"
+    ls "C:\Program Files"
+    ls "C:\Program Files (x86)\WinPcap"
+    ls "C:\Program Files\WinPcap" 
     for pf in "C:\Program Files (x86)" "C:\Program Files"
     do
         if [ -d "$pf\WinPcap" ]; then
