@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run:
           name: Install
-          command: bash .circleci/install.sh
+          command: sudo bash .circleci/install.sh
       - run:
           name: Test
           command: sudo dotnet test -f netcoreapp2.1
