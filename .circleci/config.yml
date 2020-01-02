@@ -23,8 +23,9 @@ jobs:
           command: sudo bash .circleci/install.sh
       - run:
           name: Test
-          command: sudo dotnet test -f netcoreapp2.1 --filter TestCategory!=SendPacket
-
+          command: sudo dotnet test --test-adapter-path:. --logger:junit -f netcoreapp2.1 --filter TestCategory!=SendPacket
+      - store_test_results:
+          path: Test/TestResults/TestResults.xml
 
 workflows:
   version: 2

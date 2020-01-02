@@ -17,7 +17,7 @@ for:
   build_script:
     - dotnet build -c Release
   test_script:
-    - dotnet test
+    - dotnet test --test-adapter-path:. --logger:Appveyor
 
 -
   matrix:
@@ -26,7 +26,7 @@ for:
   install:
     - sudo apt-get -qy install libpcap-dev
   test_script:
-    - sudo dotnet test -f netcoreapp2.1 --filter TestCategory!=SendPacket
+    - sudo dotnet test --test-adapter-path:. --logger:Appveyor -f netcoreapp2.1 --filter TestCategory!=SendPacket
 
 -
   matrix:
@@ -36,4 +36,4 @@ for:
     - brew update
     - brew install libpcap
   test_script:
-    - sudo dotnet test -f netcoreapp2.1
+    - sudo dotnet test --test-adapter-path:. --logger:Appveyor -f netcoreapp2.1
