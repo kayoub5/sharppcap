@@ -14,13 +14,13 @@ jobs:
           command: dotnet build -c Release
 
   test-libpcap:
-    docker:
-      - image: 'mcr.microsoft.com/dotnet/core/sdk:2.1-bionic'
+    machine:
+      image: ubuntu-1604:201903-01
     steps:
       - checkout
       - run:
           name: Install
-          command: apt-get update && apt-get install -y libpcap-dev
+          command: bash .circleci/install.sh
       - run:
           name: Test
           command: sudo dotnet test -f netcoreapp2.1

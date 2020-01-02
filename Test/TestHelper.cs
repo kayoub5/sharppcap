@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.NetworkInformation;
 using System.Reflection;
+using System.Threading;
 
 namespace Test
 {
@@ -82,7 +83,9 @@ namespace Test
             device.StartCapture();
             try
             {
+                Thread.Sleep(100);
                 routine(device);
+                Thread.Sleep(100);
             }
             finally
             {
