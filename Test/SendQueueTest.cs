@@ -80,6 +80,7 @@ namespace Test
         }
 
         [Test]
+        [Platform("Win")]
         public void TestReturnValue()
         {
             var device = GetPcapDevice();

@@ -73,7 +73,7 @@ namespace Test
             }
             Console.WriteLine($"Using device {device}");
             var received = new List<RawCapture>();
-            device.Open();
+            device.Open(DeviceMode.Promiscuous);
             device.Filter = filter;
             void OnPacketArrival(object sender, CaptureEventArgs e)
             {
@@ -83,9 +83,9 @@ namespace Test
             device.StartCapture();
             try
             {
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
                 routine(device);
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
             finally
             {
