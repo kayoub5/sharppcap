@@ -99,6 +99,15 @@ namespace Test
             }
         }
 
+        [Test]
+        public void TestIsHardwareAccelerated()
+        {
+            Assert.AreEqual(
+                SendQueue.IsHardwareAccelerated,
+                Environment.OSVersion.Platform == PlatformID.Win32NT
+            );
+        }
+
         /// <summary>
         /// Helper method
         /// </summary>
