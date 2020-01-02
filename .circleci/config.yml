@@ -31,4 +31,4 @@ workflows:
   build:
     jobs:
       - build
-      - test-libpcap
+      - test-ubuntu
