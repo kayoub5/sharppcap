@@ -1,0 +1,17 @@
+
+.windows:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+
+windows:
+  tags:
+    - shared-windows
+    - windows
+    - windows-1809
+  script:
+    - choco install winpcap
+    - dotnet build -c Release
+    - dotnet test -c Release
+ 
